@@ -244,11 +244,9 @@ $deliver_price = deliver_price($order_info[prd_price], $oper_info);
 			<th>주 소</th>
 			<td>[<?=$order_info[rece_post]?>] <?=$order_info[rece_address]?></td>
 		</tr>
-		<? if($order_info[demand] != ""){ ?>
 		<tr>
 			<th>배송시 요청사항</th>
 			<td><?=str_replace("\n","<br>&nbsp;&nbsp;",$order_info[demand])?></td>
 		</tr>
-		<? } ?>
 	</table>
 </div>

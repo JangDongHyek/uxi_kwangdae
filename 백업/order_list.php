@@ -217,18 +217,16 @@ function order_return(btn, orderid){
   			     <input style="cursor:pointer;" type="button" onClick="chgStatus('CD');" value="교환요청(<?=$CD_total?>)" <? if($s_status == "CD") echo "class='btn_sm w100 h30'"; else echo "class='btn_m w100 h30'"; ?>>
   			     <input style="cursor:pointer;" type="button" onClick="chgStatus('CC');" value="교환완료" <? if($s_status == "CC") echo "class='btn_sm w100 h30'"; else echo "class='btn_m w100 h30'"; ?>>
 
-                 <input style="cursor:pointer;" type="button" onClick="chgStatus('RT');" value="대여목록" <? if($s_status == "RT") echo "class='btn_sm w100 h30'"; else echo "class='btn_m w100 h30'"; ?>>
-
            </div>
          </td>
 			 </tr>
 			 <tr>
 			   <th>기간</th>
 			   <td>
-    				<input class="input w100" type="text" id="datepicker1" name="sdate" value="<?=$sdate?>" >
-    				<input type="button" class="btn_calendar" id=""/> ~
-    				<input class="input w100" type="text" id="datepicker2" name="edate" value="<?=$edate?>" >
-    				<input type="button" class="btn_calendar" id=""/>
+					<input class="input w100" type="text" id="datepicker1" name="sdate" value="<?=$sdate?>" >
+					<input type="button" class="btn_calendar" id=""/> ~
+					<input class="input w100" type="text" id="datepicker2" name="edate" value="<?=$edate?>" >
+					<input type="button" class="btn_calendar" id=""/>
 					<?
 					$yes_day = date('Y-m-d', mktime(0,0,0,date('m'),date('d'),date('Y'))-(3600*24*1));
 					$to_day = date('Y-m-d');
@@ -273,15 +271,9 @@ function order_return(btn, orderid){
 			   $prev_period = $sdate;
 			   $next_period = $edate." 23:59:59";
 			   $period_sql = " and wo.order_date >= '$prev_period' and wo.order_date <= '$next_period'";
-
-               if ($s_status == "RT") {
-                   $period_sql = " and ((wo.send_date between '$prev_period' and '$next_period') " ;
-                   $period_sql .= " or (wo.return_date between '$prev_period' and '$next_period')) " ;
-               }
 			}
 			if($s_status == "") $status_sql = "and wo.status != ''";
 			else if($s_status == "MI") $status_sql = "and wo.status = ''";
-            else if($s_status == "RT") $status_sql = "and wo.status = 'DC'";
 			else $status_sql = "and wo.status = '$s_status'";
 
 			if($searchopt && $searchkey) $searchopt_sql = " and wo.$searchopt like '%$searchkey%'";
